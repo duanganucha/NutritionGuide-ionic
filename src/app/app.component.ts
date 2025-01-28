@@ -13,7 +13,10 @@ export class AppComponent {
     { title: 'Archived', url: '/folder/archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+
+    { title: 'Cal Bmi', url: '/cal-bmi', icon: 'calculator' },
+    { title: 'เมนูอาหาร', url: '/menu', icon: 'calculator' }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor() { }
 }

@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>เมนูอาหาร</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">เมนูอาหาร</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list *ngFor="let category of categories">
+    <ion-list-header>
+      <ion-label>
+        <h2 class="category-title">{{ category.name }}</h2>
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item detail="true" *ngFor="let item of category.items" lines="full" class="list-tile"
+      (click)="onViewMemuDetail(item)">
+      <ion-thumbnail slot="start" class="item-thumbnail">
+        <img [src]="'assets/menu/' + item.name + '.png'">
+        <div class="placeholder-image" *ngIf="!item.image"></div>
+        <a href="">{{item.image}}</a>
+      </ion-thumbnail>
+
+      <ion-label>
+        <h3 class="item-title">{{ item.name }}</h3>
+
+        <p class="item-subtitle" *ngIf="item.description">{{ item.description }}</p>
+      </ion-label>
+
+      <ion-note slot="end" *ngIf="item.price" class="item-price">
+        {{ item.price }} ฿
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
