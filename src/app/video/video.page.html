@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>วิดีโอให้ความรู้</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-title>วิดีโอให้ความรู้</ion-title>
+  <div class="videos-container">
+    <div class="video-grid">
+      <ion-card *ngFor="let video of videos" class="video-card">
+        <ion-card-content>
+          <iframe
+            [src]="video.safeUrl"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </ion-card-content>
+        <ion-card-header>
+          <ion-card-title>{{ video.title }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

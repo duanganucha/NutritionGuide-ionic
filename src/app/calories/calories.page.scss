@@ -1,0 +1,33 @@
+.calories-value {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  margin: 20px 0 10px;
+}
+
+ion-card {
+  margin: 16px;
+}
+
+.input-section ion-item {
+  --padding-start: 0;
+  margin-bottom: 16px;
+}
+
+ion-segment {
+  margin-top: 8px;
+}
+
+.result-section {
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  ion-card {
+    margin: 0;
+  }
+
+  .result-section {
+    padding: 16px 0;
+  }
+}

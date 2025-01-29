@@ -4,7 +4,6 @@
       <ion-back-button defaultHref="/menu"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ selectedItem?.name || 'รายละเอียดเมนูอาหาร' }}</ion-title>
-
   </ion-toolbar>
 </ion-header>
 
@@ -21,8 +20,11 @@
             </ion-card-subtitle>
           </ion-card-header>
 
-          <ion-img [src]="'assets/menu/' + selectedItem.name + '.png' || 'assets/placeholder.png'"
-            [alt]="selectedItem.name" class="food-image">
+          <ion-img
+            [src]="'assets/menu/' + selectedItem.name + '.png' || 'assets/placeholder.png'"
+            [alt]="selectedItem.name"
+            class="food-image"
+          >
           </ion-img>
 
           <!-- Nutrition Card -->
@@ -35,7 +37,11 @@
               </ion-list-header>
 
               <ion-item>
-                <ion-icon color="danger" name="flame-outline" slot="start"></ion-icon>
+                <ion-icon
+                  color="danger"
+                  name="flame-outline"
+                  slot="start"
+                ></ion-icon>
                 <ion-label>พลังงาน</ion-label>
                 <ion-note slot="end">
                   {{ selectedItem.nutrition.calories || '-' }} kcal
@@ -43,7 +49,11 @@
               </ion-item>
 
               <ion-item>
-                <ion-icon color="tertiary" name="fitness-outline" slot="start"></ion-icon>
+                <ion-icon
+                  color="tertiary"
+                  name="fitness-outline"
+                  slot="start"
+                ></ion-icon>
                 <ion-label>โปรตีน</ion-label>
                 <ion-note slot="end">
                   {{ selectedItem.nutrition.protein || '-' }} g
@@ -51,7 +61,11 @@
               </ion-item>
 
               <ion-item>
-                <ion-icon color="warning" name="water-outline" slot="start"></ion-icon>
+                <ion-icon
+                  color="warning"
+                  name="water-outline"
+                  slot="start"
+                ></ion-icon>
                 <ion-label>ไขมัน</ion-label>
                 <ion-note slot="end">
                   {{ selectedItem.nutrition.fat || '-' }} g
@@ -59,7 +73,11 @@
               </ion-item>
 
               <ion-item>
-                <ion-icon color="success" name="pizza-outline" slot="start"></ion-icon>
+                <ion-icon
+                  color="success"
+                  name="pizza-outline"
+                  slot="start"
+                ></ion-icon>
                 <ion-label>คาร์โบไฮเดรต</ion-label>
                 <ion-note slot="end">
                   {{ selectedItem.nutrition.carbs || '-' }} g
@@ -67,7 +85,11 @@
               </ion-item>
 
               <ion-item>
-                <ion-icon color="medium" name="sunny-outline" slot="start"></ion-icon>
+                <ion-icon
+                  color="medium"
+                  name="sunny-outline"
+                  slot="start"
+                ></ion-icon>
                 <ion-label>โซเดียม</ion-label>
                 <ion-note slot="end">
                   {{ selectedItem.nutrition.sodium || '-' }} mg
@@ -86,8 +108,9 @@
           </ion-card-header>
           <ion-card-content>
             <ion-list>
-              <ion-item *ngFor="let ingredient of selectedItem.ingredients ;let i = index">
-
+              <ion-item
+                *ngFor="let ingredient of selectedItem.ingredients ;let i = index"
+              >
                 <ion-label> {{ i + 1 }}. {{ ingredient }}</ion-label>
               </ion-item>
             </ion-list>
@@ -101,7 +124,9 @@
           </ion-card-header>
           <ion-card-content>
             <ion-list>
-              <ion-item *ngFor="let step of selectedItem.instructions; let i = index">
+              <ion-item
+                *ngFor="let step of selectedItem.instructions; let i = index"
+              >
                 <ion-label class="ion-text-wrap">
                   <h3>ขั้นตอนที่ {{ i + 1 }}</h3>
                   <p>{{ step }}</p>

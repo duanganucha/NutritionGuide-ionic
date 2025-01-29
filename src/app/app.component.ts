@@ -7,16 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-
-    { title: 'Cal Bmi', url: '/cal-bmi', icon: 'calculator' },
-    { title: 'เมนูอาหาร', url: '/menu', icon: 'calculator' }
+    { title: 'คำนวณ Bmi', url: '/cal-bmi', icon: 'fitness' }, // Changed to fitness icon
+    { title: 'เมนูอาหาร', url: '/menu', icon: 'restaurant' }, // Changed to restaurant icon
+    { title: 'ส่วนประกอบอาหาร', url: '/ingredient', icon: 'nutrition' }, // Changed to nutrition icon
+    { title: 'วิดีโอความรู้', url: '/video', icon: 'videocam' }, // Changed to video camera icon
+    { title: 'คำนวณแคลอรี่', url: '/calories', icon: 'flame' }, // Changed to flame icon for calories
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() { }
+  constructor() {}
 }

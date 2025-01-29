@@ -1,0 +1,154 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>คำนวณความต้องการพลังงาน</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center"
+              >คำนวณความต้องการพลังงาน</ion-card-title
+            >
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-md="6" size="12">
+                  <!-- Input Section -->
+                  <div class="input-section">
+                    <!-- Gender Selection -->
+                    <ion-item>
+                      <ion-label position="stacked">เพศ</ion-label>
+                      <ion-segment
+                        [(ngModel)]="gender"
+                        (ionChange)="calculateCalories()"
+                      >
+                        <ion-segment-button value="male">
+                          <ion-label>👨 ชาย</ion-label>
+                        </ion-segment-button>
+                        <ion-segment-button value="female">
+                          <ion-label>👩 หญิง</ion-label>
+                        </ion-segment-button>
+                      </ion-segment>
+                    </ion-item>
+
+                    <!-- Age Input -->
+                    <ion-item>
+                      <ion-label position="stacked">อายุ (ปี)</ion-label>
+                      <ion-input
+                        type="number"
+                        [(ngModel)]="age"
+                        (ionChange)="calculateCalories()"
+                        min="1"
+                        max="120"
+                        placeholder="กรุณากรอกอายุ"
+                      ></ion-input>
+                    </ion-item>
+
+                    <!-- Weight Input -->
+                    <ion-item>
+                      <ion-label position="stacked">น้ำหนัก (กก.)</ion-label>
+                      <ion-input
+                        type="number"
+                        [(ngModel)]="weight"
+                        (ionChange)="calculateCalories()"
+                        min="1"
+                        max="300"
+                        placeholder="กรุณากรอกน้ำหนัก"
+                      ></ion-input>
+                    </ion-item>
+
+                    <!-- Height Input -->
+                    <ion-item>
+                      <ion-label position="stacked">ส่วนสูง (ซม.)</ion-label>
+                      <ion-input
+                        type="number"
+                        [(ngModel)]="height"
+                        (ionChange)="calculateCalories()"
+                        min="1"
+                        max="300"
+                        placeholder="กรุณากรอกส่วนสูง"
+                      ></ion-input>
+                    </ion-item>
+
+                    <!-- Activity Level -->
+                    <ion-item>
+                      <ion-label position="stacked">ระดับกิจกรรม</ion-label>
+                      <ion-select
+                        [(ngModel)]="activityLevel"
+                        (ionChange)="calculateCalories()"
+                        interface="action-sheet"
+                        [interfaceOptions]="{ header: 'เลือกระดับกิจกรรม' }"
+                      >
+                        <ion-select-option value="1.2"
+                          >📱 นั่งทำงานตลอดวัน</ion-select-option
+                        >
+                        <ion-select-option value="1.375"
+                          >🚶 ออกกำลังกายเบาๆ 1-3 วัน/สัปดาห์</ion-select-option
+                        >
+                        <ion-select-option value="1.55"
+                          >🏃 ออกกำลังกายปานกลาง 3-5
+                          วัน/สัปดาห์</ion-select-option
+                        >
+                        <ion-select-option value="1.725"
+                          >💪 ออกกำลังกายหนัก 6-7 วัน/สัปดาห์</ion-select-option
+                        >
+                      </ion-select>
+                    </ion-item>
+                  </div>
+                </ion-col>
+
+                <!-- Results Section -->
+                <ion-col size-md="6" size="12" *ngIf="calories">
+                  <div class="result-section">
+                    <div class="calories-display ion-text-center">
+                      <h1 class="calories-value">
+                        {{ calories | number:'1.0-0' }}
+                      </h1>
+                      <ion-text color="medium">แคลอรี่/วัน</ion-text>
+                    </div>
+
+                    <ion-list>
+                      <ion-item>
+                        <ion-label>
+                          <h2>ลดน้ำหนัก</h2>
+                          <p>
+                            {{ calories - 500 | number:'1.0-0' }} แคลอรี่/วัน
+                          </p>
+                        </ion-label>
+                      </ion-item>
+
+                      <ion-item color="primary">
+                        <ion-label>
+                          <h2>คงที่</h2>
+                          <p>{{ calories | number:'1.0-0' }} แคลอรี่/วัน</p>
+                        </ion-label>
+                      </ion-item>
+
+                      <ion-item>
+                        <ion-label>
+                          <h2>เพิ่มน้ำหนัก</h2>
+                          <p>
+                            {{ calories + 500 | number:'1.0-0' }} แคลอรี่/วัน
+                          </p>
+                        </ion-label>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

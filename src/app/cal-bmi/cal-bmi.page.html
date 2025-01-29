@@ -1,17 +1,9 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>คำนวณดัชนีมวลกาย (BMI)</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="resetForm()">
-        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="presentInfoModal()">
-        <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
@@ -20,21 +12,35 @@
       <ion-list>
         <ion-item>
           <ion-label position="stacked">น้ำหนัก (กิโลกรัม)</ion-label>
-          <ion-input type="number" [(ngModel)]="weight" [min]="0" [max]="300"
-            placeholder="กรุณากรอกน้ำหนัก"></ion-input>
+          <ion-input
+            type="number"
+            [(ngModel)]="weight"
+            [min]="0"
+            [max]="300"
+            placeholder="กรุณากรอกน้ำหนัก"
+          ></ion-input>
           <ion-note slot="end">kg</ion-note>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">ส่วนสูง (เซนติเมตร)</ion-label>
-          <ion-input type="number" [(ngModel)]="height" [min]="0" [max]="300"
-            placeholder="กรุณากรอกส่วนสูง"></ion-input>
+          <ion-input
+            type="number"
+            [(ngModel)]="height"
+            [min]="0"
+            [max]="300"
+            placeholder="กรุณากรอกส่วนสูง"
+          ></ion-input>
           <ion-note slot="end">cm</ion-note>
         </ion-item>
       </ion-list>
 
       <div class="calculate-button-container">
-        <ion-button expand="block" (click)="calculateBMI()" [disabled]="!weight || !height">
+        <ion-button
+          expand="block"
+          (click)="calculateBMI()"
+          [disabled]="!weight || !height"
+        >
           <ion-icon name="calculator-outline" slot="start"></ion-icon>
           คำนวณ BMI
         </ion-button>
@@ -47,42 +53,30 @@
         </div>
 
         <ion-text [color]="getBMIColor()" class="category">
-          <div class="category-icon">
-            {{ getCategoryEmoji() }}
-          </div>
-          <div class="category-text">
-            {{ getBMICategory() }}
-          </div>
+          <div class="category-icon">{{ getCategoryEmoji() }}</div>
+          <div class="category-text">{{ getBMICategory() }}</div>
         </ion-text>
 
         <ion-grid class="bmi-scale">
           <ion-row>
             <ion-col size="6" size-sm="3">
               <ion-text color="primary">
-                <div class="scale-item">
-                  น้ำหนักต่ำ<br />&lt;18.5
-                </div>
+                <div class="scale-item">น้ำหนักต่ำ<br />&lt;18.5</div>
               </ion-text>
             </ion-col>
             <ion-col size="6" size-sm="3">
               <ion-text color="success">
-                <div class="scale-item">
-                  ปกติ<br />18.5-24.9
-                </div>
+                <div class="scale-item">ปกติ<br />18.5-24.9</div>
               </ion-text>
             </ion-col>
             <ion-col size="6" size-sm="3">
               <ion-text color="warning">
-                <div class="scale-item">
-                  น้ำหนักเกิน<br />25-29.9
-                </div>
+                <div class="scale-item">น้ำหนักเกิน<br />25-29.9</div>
               </ion-text>
             </ion-col>
             <ion-col size="6" size-sm="3">
               <ion-text color="danger">
-                <div class="scale-item">
-                  อ้วน<br />&gt;30
-                </div>
+                <div class="scale-item">อ้วน<br />&gt;30</div>
               </ion-text>
             </ion-col>
           </ion-row>
