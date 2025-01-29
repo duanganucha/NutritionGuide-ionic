@@ -1,0 +1,14 @@
+nvm use 20 && ng build --configuration production --base-href "/NutritionGuide/" &&
+git init &&
+git remote add origin https://github.com/duanganucha/NutritionGuide-ionic.git  &&
+git branch -M main  &&
+git add . && git commit -m "xx" && git push origin main -f
+
+
+
+nvm use 20 && ng build --configuration production --base-href "/NutritionGuide/docs/browser" &&
+git branch -M main  &&
+git add . && git commit -m "xx" && git push origin main -f
+
+
+bash deploy.sh
