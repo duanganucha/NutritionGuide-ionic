@@ -1,0 +1,75 @@
+.video-list-container {
+  --background: #FFB6C1;
+
+  .header {
+    padding: 20px;
+    text-align: center;
+
+    h1 {
+      color: #7B68EE;
+      font-size: 24px;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+
+  .list-container {
+    padding: 10px 20px;
+  }
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    color: #333;
+    transition: all 0.3s ease;
+
+    &:active {
+      background: rgba(255, 255, 255, 0.7);
+      transform: scale(0.98);
+    }
+
+    .icon-wrapper {
+      width: 40px;
+      height: 40px;
+      background: #87CEEB;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .list-icon {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: white;
+      stroke-width: 2;
+    }
+
+    span {
+      flex: 1;
+      font-size: 16px;
+    }
+
+    .arrow-icon {
+      width: 20px;
+      height: 20px;
+      stroke: #87CEEB;
+      stroke-width: 2;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// For iOS status bar
+ion-content {
+  --padding-top: env(safe-area-inset-top);
+}

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -11,8 +12,28 @@ import { IonicModule } from '@ionic/angular';
 })
 export class VideoPage {
   videos: { title: string; safeUrl: SafeResourceUrl }[];
+  video: { title: string; safeUrl: SafeResourceUrl } | undefined;
 
-  constructor(private sanitizer: DomSanitizer) {
+  type: string = '';
+
+  ngOnInit() {
+    const paramType = this.route.snapshot.paramMap.get('type');
+    if (paramType) {
+      this.type = paramType;
+      console.log(this.type);
+      if (this.type == '1') {
+        this.video = this.videos[0];
+      } else {
+        this.video = this.videos[1];
+      }
+    }
+  }
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.videos = [
       {
         title: 'ความรู้โรคความดันโลหิต',
@@ -27,5 +48,8 @@ export class VideoPage {
         ),
       },
     ];
+  }
+  goBack() {
+    this.router.navigate(['/video-list']);
   }
 }

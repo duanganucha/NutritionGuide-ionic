@@ -6,14 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { CalBmiPageRoutingModule } from './cal-bmi-routing.module';
 
-import { CalBmiPage } from './cal-bmi.page';
-
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    CalBmiPageRoutingModule
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, CalBmiPageRoutingModule],
 })
-export class CalBmiPageModule { }
+export class CalBmiPageModule {}

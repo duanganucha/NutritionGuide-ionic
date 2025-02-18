@@ -13,19 +13,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MenuDetailPage implements OnInit {
   selectedItem: MenuItem | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.selectedItem = history.state.selectedItem;
     if (!this.selectedItem) {
       // Programmatically navigate back to menu page if no item selected
-      this.router.navigate(['/menu']);
+      this.router.navigate(['/ingredient']);
     }
   }
 
   getName(name: any) {
-    var a = "menu/" + name + ".png";
+    var a = 'menu/' + name + '.png';
     console.log(a);
-    return "menu/" + name + ".png";
+    return 'menu/' + name + '.png';
   }
 }

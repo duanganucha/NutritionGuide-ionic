@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
+    { title: 'welcome', url: '/welcome', icon: 'fitness' }, // Changed to fitness icon
     { title: 'คำนวณ Bmi', url: '/cal-bmi', icon: 'fitness' }, // Changed to fitness icon
     { title: 'เมนูอาหาร', url: '/menu', icon: 'restaurant' }, // Changed to restaurant icon
     { title: 'ส่วนประกอบอาหาร', url: '/ingredient', icon: 'nutrition' }, // Changed to nutrition icon

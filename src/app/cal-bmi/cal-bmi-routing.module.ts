@@ -6,8 +6,8 @@ import { CalBmiPage } from './cal-bmi.page';
 const routes: Routes = [
   {
     path: '',
-    component: CalBmiPage
-  }
+    component: CalBmiPage,
+  },
 ];
 
 @NgModule({

@@ -1,86 +1,66 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+<ion-header>
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/sodium-menu"></ion-back-button>
     </ion-buttons>
-    <ion-title>ส่วนประกอบอาหาร</ion-title>
+    <ion-title>{{ type === 'raw' ? 'ผัก' : 'อาหารแปรรูป' }}</ion-title>
+
+    <ion-buttons slot="end" (click)="goCartPage()">
+      แสดงส่วนประกอบที่เลือก
+      <ion-button>
+        <ion-icon name="cart" slot="icon-only" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">ส่วนประกอบอาหาร</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content>
   <ion-grid>
-    <ion-row *ngFor="let category of categories">
-      <ion-col size="12">
-        <ion-card-header>
-          <ion-card-title>{{ category.name }}</ion-card-title>
-        </ion-card-header>
-
-        <ion-grid>
-          <ion-row>
-            <ion-col
-              size="6"
-              size-md="6"
-              size-lg="4"
-              *ngFor="let item of category.items"
+    <ion-row>
+      <ion-col
+        size="6"
+        size-sm="6"
+        size-md="4"
+        size-lg="3"
+        *ngFor="let item of categories"
+      >
+        <ion-card>
+          <img
+            [src]="'assets/ingredients/' + item.name + '.png'"
+            [alt]="item.name"
+            class="ingredient-image"
+          />
+          <ion-card-header>
+            <ion-card-title class="ion-text-wrap"
+              >{{ item.name }}</ion-card-title
             >
-              <ion-card-content class="ion-text-center">
-                <div class="image-container">
-                  <img
-                    [src]="
-                            'assets/ingredients/' + item.name + '.png' ||
-                            'assets/menu/placeholder.png'
-                          "
-                    (error)="item.image = ''"
-                    *ngIf="item.image; else svgFallback"
-                    alt="{{ item.name }}"
-                    width="100"
-                    height="100"
-                    style="object-fit: contain"
-                  />
-
-                  <ng-template #svgFallback>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 100 100"
-                      [attr.fill]="getIconColor(item.iconType)"
-                      width="100"
-                      height="100"
-                    >
-                      <rect width="100" height="100" fill="#f5f5f5" />
-                      <circle
-                        cx="50"
-                        cy="40"
-                        r="25"
-                        [attr.fill]="getIconColor(item.iconType)"
-                      />
-                      <text
-                        x="50"
-                        y="85"
-                        text-anchor="middle"
-                        font-size="10"
-                        fill="#333"
-                      >
-                        {{ item.name }}
-                      </text>
-                    </svg>
-                  </ng-template>
-                </div>
-                <div class="item-details">
-                  <div class="name">{{ item.name }} {{ item.weight }} กรัม</div>
-                  <div class="calories">
-                    เท่ากับโซเดียม {{ item.calories }} มิลลิกรัม
-                  </div>
-                </div>
-              </ion-card-content>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list lines="none">
+              <ion-item>
+                <ion-icon
+                  name="leaf"
+                  slot="start"
+                  [style.color]="getIconColor(item.iconType)"
+                >
+                </ion-icon>
+                <ion-label>น้ำหนัก {{ item.weight }}g</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="flame" slot="start" color="danger"> </ion-icon>
+                <ion-label>ปริมาณโซเดียม {{ item.sodium }} mg</ion-label>
+              </ion-item>
+            </ion-list>
+            <ion-button
+              expand="block"
+              (click)="addToCart(item)"
+              class="ion-margin-top"
+            >
+              <ion-icon name="cart" slot="start"></ion-icon>
+              เลือกส่วนประกอบ
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
