@@ -138,6 +138,13 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <div class="calculate-button-container">
+    <ion-button expand="block" (click)="selectMenu(selectedItem)">
+      <ion-icon name="calculator-outline" slot="start"></ion-icon>
+      เลือกเมนู
+    </ion-button>
+  </div>
 </ion-content>
 
 <ng-template #noData>

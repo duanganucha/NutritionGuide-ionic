@@ -95,6 +95,10 @@ const routes: Routes = [
     path: 'cart',
     loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
   },
+  {
+    path: 'records',
+    loadChildren: () => import('./records/records.module').then( m => m.RecordsPageModule)
+  },
 
 ];
 

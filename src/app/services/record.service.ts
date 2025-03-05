@@ -1,9 +1,11 @@
 // services/order.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, retry, timeout } from 'rxjs';
 import { UserData } from '../pages/cart/cart.page';
 import { Ingredient } from './cart-service.service';
+import * as moment from 'moment';
+import { AngufirestoreService } from './angufirestore.service';
 
 export interface RecordData {
   orderDate: string;
@@ -15,26 +17,24 @@ export interface RecordData {
     sodium: number;
     total: number;
   }[];
-  totalAmount: number;
+  totalSodium: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecordService {
-  // Replace with your Google Apps Script deployment URL
   private apiUrl =
-    'https://script.google.com/macros/s/AKfycbw7DX7o1MdINopzZAfklH69P9i92tF2TjvXIsTLjX2iFO-b4S4q2SVoqusIkA9AGDna/exec';
+    'https://script.google.com/macros/s/AKfycbwdY4pUK44y3QsABqtCe09QA3sKG9_6pUFyq2ecbqLhfa7sfJzat2tqhXk4bDM8gR8o/exec';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private angufirestore: AngufirestoreService
+  ) {}
 
-  submitOrder(
-    cartItems: Ingredient[],
-    userData: UserData,
-    total: number
-  ): Observable<any> {
+  submitOrder(cartItems: Ingredient[], userData: UserData, total: number) {
     const orderData: RecordData = {
-      orderDate: new Date().toISOString(),
+      orderDate: moment().format('yyyy-MM-DD'),
       orderNumber: this.generateOrderNumber(),
       userData: userData,
       items: cartItems.map((item) => ({
@@ -43,20 +43,31 @@ export class RecordService {
         sodium: item.sodium,
         total: item.sodium * (item.quantity || 1),
       })),
-      totalAmount: total,
+      totalSodium: total,
     };
 
-    return this.http.post(this.apiUrl, orderData);
+    return this.angufirestore.createById(
+      'nurse_nutrition',
+      orderData,
+      orderData.orderNumber
+    );
+
+    // var headers = new HttpHeaders({
+    //   'Content-Type': 'text/plain',
+    // });
+
+    // const options = {
+    //   headers: headers,
+    //   withCredentials: false, // Set this to false for Google Apps Script
+    // };
+
+    // console.log(orderData);
+
+    // return this.http.post(this.apiUrl, orderData, options);
   }
 
   private generateOrderNumber(): string {
-    const date = new Date();
-    const year = date.getFullYear().toString().slice(-2);
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    const random = Math.floor(Math.random() * 1000)
-      .toString()
-      .padStart(3, '0');
-    return `ORD${year}${month}${day}${random}`;
+    const date = moment().format('yyyy-MM-DD-HHmmss');
+    return `${date}`;
   }
 }

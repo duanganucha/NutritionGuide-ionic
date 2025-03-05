@@ -11,6 +11,20 @@ import { CartService, Ingredient } from '../services/cart-service.service';
   imports: [IonicModule, CommonModule],
 })
 export class IngredientPage {
+  type = '';
+  categories: Ingredient[] = [];
+  ngOnInit() {
+    const paramType = this.route.snapshot.paramMap.get('type');
+    if (paramType) {
+      this.type = paramType;
+      console.log(this.type);
+      var type_name = this.getType(this.type);
+      this.categories = this.categories_all.filter(
+        (c) => c.category == type_name
+      );
+    }
+  }
+
   getIconColor(type: string): string {
     switch (type) {
       case 'vegetable':
@@ -21,8 +35,18 @@ export class IngredientPage {
         return '#9E9E9E';
     }
   }
-
-  categories: Ingredient[] = [
+  getType(type: string) {
+    if (type == 'raw') {
+      return 'ผัก';
+    } else if (type == 'processed') {
+      return 'อาหารแปรรูป';
+    } else if (type == 'cooked') {
+      return 'เครื่องปรุง';
+    } else {
+      return '';
+    }
+  }
+  categories_all: Ingredient[] = [
     {
       id: 1,
       category: 'ผัก',
@@ -233,9 +257,97 @@ export class IngredientPage {
         'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
       iconType: 'processed',
     },
+    {
+      id: 22,
+      category: 'เครื่องปรุง',
+      name: 'เกลือ 1 ช้อนชา',
+      weight: 100,
+      sodium: 2200,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
+    {
+      id: 23,
+      category: 'เครื่องปรุง',
+      name: 'ผงปรุงรส 1 ช้อนชา',
+      weight: 100,
+      sodium: 500,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
+    {
+      id: 24,
+      category: 'เครื่องปรุง',
+      name: 'ปลาร้า 1 ช้อนชา',
+      weight: 100,
+      sodium: 550,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
+    {
+      id: 25,
+      category: 'เครื่องปรุง',
+      name: 'กะปิ 1 ช้อนชา',
+      weight: 100,
+      sodium: 500,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
+    {
+      id: 26,
+      category: 'เครื่องปรุง',
+      name: 'ผงชูรส 1 ช้อนชา',
+      weight: 100,
+      sodium: 490,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
+    {
+      id: 27,
+      category: 'เครื่องปรุง',
+      name: 'น้ำปลา 1 ช้อนชา',
+      weight: 100,
+      sodium: 500,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
+    {
+      id: 28,
+      category: 'เครื่องปรุง',
+      name: 'ซีอิ๊วขาว 1 ช้อนชา',
+      weight: 100,
+      sodium: 453,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
+    {
+      id: 29,
+      category: 'เครื่องปรุง',
+      name: 'ซอสหอยนางรม 1 ช้อนชา',
+      weight: 100,
+      sodium: 165,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
+    {
+      id: 30,
+      category: 'เครื่องปรุง',
+      name: 'ซุปก้อน (ก้อน)',
+      weight: 100,
+      sodium: 2000,
+      image:
+        'https://cdn.pixabay.com/photo/2016/03/05/19/02/pork-roll-1238239_960_720.jpg',
+      iconType: 'processed',
+    },
   ];
-
-  type: string = '';
 
   constructor(
     private toastController: ToastController,

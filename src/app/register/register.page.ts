@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 interface UserData {
   firstName: string;
   lastName: string;
-  idCard: string;
+  telPhone: string;
   gender: string;
   age: number;
 }
@@ -26,7 +26,7 @@ export class RegisterPage implements OnInit {
   userData: UserData = {
     firstName: '',
     lastName: '',
-    idCard: '',
+    telPhone: '',
     gender: '',
     age: 0,
   };
@@ -63,10 +63,10 @@ export class RegisterPage implements OnInit {
     }
 
     // Validate Thai ID
-    if (!this.validateThaiID(this.userData.idCard)) {
-      await this.showToast('เลขบัตรประชาชนไม่ถูกต้อง', 'warning');
-      return;
-    }
+    // if (!this.validateThaiID(this.userData.idCard)) {
+    //   await this.showToast('เลขบัตรประชาชนไม่ถูกต้อง', 'warning');
+    //   return;
+    // }
 
     const loading = await this.loadingController.create({
       message: 'กำลังบันทึกข้อมูล...',
@@ -82,7 +82,7 @@ export class RegisterPage implements OnInit {
 
       setTimeout(() => {
         this.menuPage();
-      }, 2000);
+      }, 1000);
 
       // Optional: Navigate to next page
       // this.router.navigate(['/home']);
@@ -105,7 +105,7 @@ export class RegisterPage implements OnInit {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,
-      position: 'bottom',
+      position: 'top',
       color: color,
       buttons: [
         {
@@ -132,7 +132,7 @@ export class RegisterPage implements OnInit {
     this.userData = {
       firstName: '',
       lastName: '',
-      idCard: '',
+      telPhone: '',
       gender: '',
       age: 0,
     };

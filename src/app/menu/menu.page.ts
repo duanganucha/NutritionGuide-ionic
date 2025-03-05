@@ -36,8 +36,13 @@ export class MenuPage implements OnInit {
   }
 
   getName(name: any) {
-    var a = "menu/" + name + ".png";
+    var a = 'menu/' + name + '.png';
     console.log(a);
-    return "menu/" + name + ".png";
+    return 'menu/' + name + '.png';
+  }
+
+  navigateCarPage() {
+    console.log('navigateCarPage');
+    this.router.navigate(['/cart']);
   }
 }

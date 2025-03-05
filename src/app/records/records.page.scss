@@ -1,0 +1,32 @@
+.custom-accordion {
+  margin-bottom: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.record-header {
+  --background: var(--ion-color-light);
+}
+
+.item-icon {
+  font-size: 24px;
+  color: var(--ion-color-primary);
+}
+
+.items-list ion-item {
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+}
+
+.nutrition-summary ion-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.user-profile ion-grid {
+  padding: 0;
+}
+
+.user-profile ion-row {
+  margin-bottom: 8px;
+}

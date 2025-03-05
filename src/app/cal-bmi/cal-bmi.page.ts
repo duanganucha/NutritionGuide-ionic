@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController, IonicModule, ModalController } from '@ionic/angular';
+import { UserData } from '../pages/cart/cart.page';
 
 @Component({
   standalone: true,
@@ -10,50 +12,63 @@ import { AlertController, IonicModule, ModalController } from '@ionic/angular';
 
   templateUrl: './cal-bmi.page.html',
   styleUrls: ['./cal-bmi.page.scss'],
-
 })
 export class CalBmiPage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
-    private alertCtrl: AlertController
-  ) { }
-  ngOnInit(): void {
-
-  }
+    private alertCtrl: AlertController,
+    private router: Router
+  ) {}
+  ngOnInit(): void {}
 
   weight: number = 0;
   height: number = 0;
   bmi: number = 0;
+  userData: UserData | null = null;
 
   calculateBMI() {
     if (this.weight > 0 && this.height > 0) {
       const heightInMeters = this.height / 100;
       this.bmi = this.weight / (heightInMeters * heightInMeters);
+      localStorage.setItem('bmi', this.bmi.toFixed(2));
+      localStorage.setItem('weight', this.height.toFixed(2));
+      localStorage.setItem('height', this.height.toFixed(2));
+
+      const savedData = localStorage.getItem('userData');
+      if (savedData) {
+        this.userData = JSON.parse(savedData);
+        this.userData!.bmi = this.bmi.toFixed(2);
+        localStorage.setItem('userData', JSON.stringify(this.userData));
+      }
     }
   }
 
+  gotoPageCalories() {
+    this.router.navigate(['/calories']);
+  }
+
   getBMICategory(): string {
-    if (!this.bmi) return "";
-    if (this.bmi < 18.5) return "น้ำหนักต่ำกว่าเกณฑ์";
-    if (this.bmi < 25) return "น้ำหนักปกติ";
-    if (this.bmi < 30) return "น้ำหนักเกิน";
-    return "อ้วน";
+    if (!this.bmi) return '';
+    if (this.bmi < 18.5) return 'น้ำหนักต่ำกว่าเกณฑ์';
+    if (this.bmi < 25) return 'น้ำหนักปกติ';
+    if (this.bmi < 30) return 'น้ำหนักเกิน';
+    return 'อ้วน';
   }
 
   getBMIColor(): string {
-    if (!this.bmi) return "";
-    if (this.bmi < 18.5) return "primary";
-    if (this.bmi < 25) return "success";
-    if (this.bmi < 30) return "warning";
-    return "danger";
+    if (!this.bmi) return '';
+    if (this.bmi < 18.5) return 'primary';
+    if (this.bmi < 25) return 'success';
+    if (this.bmi < 30) return 'warning';
+    return 'danger';
   }
 
   getCategoryEmoji(): string {
-    if (!this.bmi) return "";
-    if (this.bmi < 18.5) return "😟";
-    if (this.bmi < 25) return "😊";
-    if (this.bmi < 30) return "😕";
-    return "😟";
+    if (!this.bmi) return '';
+    if (this.bmi < 18.5) return '😟';
+    if (this.bmi < 25) return '😊';
+    if (this.bmi < 30) return '😕';
+    return '😟';
   }
 
   getBMIPercentage(): number {
@@ -71,7 +86,7 @@ export class CalBmiPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: 'เกี่ยวกับ BMI',
       message: `ดัชนีมวลกาย (Body Mass Index: BMI) เป็นค่าที่ใช้ประเมินภาวะน้ำหนักเกินและอ้วน
-      
+
 การแปลผล BMI สำหรับผู้ใหญ่:
 - น้ำหนักต่ำกว่าเกณฑ์: < 18.5
 - น้ำหนักปกติ: 18.5 - 24.9
@@ -80,7 +95,7 @@ export class CalBmiPage implements OnInit {
 
 หมายเหตุ: BMI เป็นเพียงการประเมินเบื้องต้น ควรปรึกษาแพทย์สำหรับการประเมินสุขภาพที่ละเอียดยิ่งขึ้น`,
       buttons: ['ตกลง'],
-      cssClass: 'custom-alert'
+      cssClass: 'custom-alert',
     });
 
     await alert.present();

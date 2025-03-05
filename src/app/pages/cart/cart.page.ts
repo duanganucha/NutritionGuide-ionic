@@ -7,15 +7,22 @@ import {
   IonicModule,
   LoadingController,
 } from '@ionic/angular';
+import { firstValueFrom } from 'rxjs';
 import { CartService, Ingredient } from 'src/app/services/cart-service.service';
 import { RecordService } from 'src/app/services/record.service';
 
 export interface UserData {
   firstName: string;
   lastName: string;
-  idCard: string;
+  telPhone: string;
   gender: 'male' | 'female';
   age: number;
+  weight: number;
+  height: number;
+  bmi: any;
+  activity: any;
+  activityText: any;
+  calories: number;
 }
 
 @Component({
@@ -130,15 +137,29 @@ export class CartPage implements OnInit {
     await loading.present();
 
     try {
-      const response = await this.recordService
-        .submitOrder(this.cartItems, this.userData, this.total)
-        .toPromise();
+      // const response = await firstValueFrom(
+      //   this.recordService.submitOrder(
+      //     this.cartItems,
+      //     this.userData,
+      //     this.total
+      //   )
+      // );
+
+      const response = this.recordService.submitOrder(
+        this.cartItems,
+        this.userData,
+        this.total
+      );
+
+      console.log('API Response:', response);
+
+      await loading.dismiss();
 
       await loading.dismiss();
 
       const alert = await this.alertController.create({
         header: 'สำเร็จ',
-        message: `การสั่งซื้อเสร็จสมบูรณ์\nเลขที่คำสั่งซื้อ: ${response.orderNumber}`,
+        message: `บันทึกเสร็จสมบูรณ์`,
         buttons: [
           {
             text: 'ตกลง',
@@ -151,12 +172,29 @@ export class CartPage implements OnInit {
       });
       await alert.present();
     } catch (error) {
+      console.log(error);
       await loading.dismiss();
+      // const alert = await this.alertController.create({
+      //   header: 'ข้อผิดพลาด',
+      //   message: 'เกิดข้อผิดพลาดในการสั่งซื้อ กรุณาลองใหม่อีกครั้ง',
+      //   buttons: ['ตกลง'],
+      // });
+
       const alert = await this.alertController.create({
-        header: 'ข้อผิดพลาด',
-        message: 'เกิดข้อผิดพลาดในการสั่งซื้อ กรุณาลองใหม่อีกครั้ง',
-        buttons: ['ตกลง'],
+        header: 'สำเร็จ',
+        message: ``,
+        buttons: [
+          {
+            text: 'ตกลง',
+            handler: () => {
+              this.cartService.clearCart();
+              // this.router.navigate(['/orders']);
+            },
+          },
+        ],
       });
+      await alert.present();
+
       await alert.present();
     }
   }

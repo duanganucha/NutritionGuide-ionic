@@ -49,7 +49,10 @@ export class VideoPage {
       },
     ];
   }
-  goBack() {
-    this.router.navigate(['/video-list']);
+  goNext() {
+    this.router.navigate(['/video/2']);
+  }
+  goMain() {
+    this.router.navigate(['/main-menu']);
   }
 }

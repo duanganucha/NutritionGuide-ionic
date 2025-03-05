@@ -37,13 +37,25 @@
     </ion-card>
 
     <ion-button
+      *ngIf="type == '1'"
       expand="block"
       fill="clear"
       class="back-button"
-      (click)="goBack()"
+      (click)="goNext()"
+    >
+      <ion-icon slot="start" name="arrow-forward-outline"></ion-icon>
+      ถัดไป
+    </ion-button>
+
+    <ion-button
+      *ngIf="type == '2'"
+      expand="block"
+      fill="clear"
+      class="back-button"
+      (click)="goMain()"
     >
       <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
-      ถัดไป
+      กลับหน้าหลัก
     </ion-button>
   </div>
 </ion-content>

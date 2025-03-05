@@ -42,12 +42,20 @@ export class MainMenuPage implements OnInit {
       color: '#E91E63', // สีชมพู
     },
     {
+      title: 'ตารางเมนูทีเลือก',
+      description: 'บันทึกและติดตามผล',
+      route: '/cart',
+      icon: 'star',
+      color: '#1027B0', // สีม่วง
+    },
+    {
       title: 'ตารางบันทึกผล',
       description: 'บันทึกและติดตามผล',
       route: '/records',
       icon: 'document',
       color: '#9C27B0', // สีม่วง
     },
+
     {
       title: 'สิ้นสุดการใช้งาน',
       description: 'ออกจากระบบ',

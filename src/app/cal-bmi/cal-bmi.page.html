@@ -46,6 +46,17 @@
         </ion-button>
       </div>
 
+      <div class="calculate-button-container" *ngIf="bmi != 0">
+        <ion-button
+          expand="block"
+          (click)="gotoPageCalories()"
+          [disabled]="bmi == 0"
+        >
+          <ion-icon name="calculator-outline" slot="start"></ion-icon>
+          คำนวณแคลเลอรี่
+        </ion-button>
+      </div>
+
       <div class="result-container" *ngIf="bmi">
         <div class="bmi-gauge" [style.--percentage]="getBMIPercentage()">
           <div class="gauge-value">{{ bmi | number:'1.1-1' }}</div>

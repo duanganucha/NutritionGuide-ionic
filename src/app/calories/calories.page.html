@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/cal-bmi"></ion-back-button>
     </ion-buttons>
     <ion-title>คำนวณความต้องการพลังงาน</ion-title>
   </ion-toolbar>
@@ -116,7 +116,24 @@
                       <ion-text color="medium">แคลอรี่/วัน</ion-text>
                     </div>
 
-                    <ion-list>
+                    <div
+                      class="calculate-button-container"
+                      *ngIf="calories != 0"
+                    >
+                      <ion-button
+                        expand="block"
+                        (click)="saveCalories()"
+                        [disabled]="calories == 0"
+                      >
+                        <ion-icon
+                          name="calculator-outline"
+                          slot="start"
+                        ></ion-icon>
+                        บันทึก / ถัดไป
+                      </ion-button>
+                    </div>
+
+                    <!-- <ion-list>
                       <ion-item>
                         <ion-label>
                           <h2>ลดน้ำหนัก</h2>
@@ -141,7 +158,7 @@
                           </p>
                         </ion-label>
                       </ion-item>
-                    </ion-list>
+                    </ion-list> -->
                   </div>
                 </ion-col>
               </ion-row>

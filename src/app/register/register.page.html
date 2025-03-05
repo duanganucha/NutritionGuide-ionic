@@ -55,7 +55,7 @@
             </ion-note>
           </ion-item>
 
-          <ion-item>
+          <!-- <ion-item>
             <ion-label position="stacked">เลขบัตรประชาชน</ion-label>
             <ion-input
               [(ngModel)]="userData.idCard"
@@ -71,6 +71,27 @@
             <ion-note
               color="danger"
               *ngIf="idCard.invalid && (idCard.dirty || idCard.touched)"
+            >
+              กรุณากรอกเลขบัตรประชาชน 13 หลัก
+            </ion-note>
+          </ion-item> -->
+
+          <ion-item>
+            <ion-label position="stacked">เบอร์โทรศัพท์</ion-label>
+            <ion-input
+              [(ngModel)]="userData.telPhone"
+              name="telPhone"
+              type="text"
+              required
+              maxlength="10"
+              pattern="[0-9]{10}"
+              #telPhone="ngModel"
+              placeholder="กรุณากรอกเบอร์โทรศัพท์"
+            >
+            </ion-input>
+            <ion-note
+              color="danger"
+              *ngIf="telPhone.invalid && (telPhone.dirty || telPhone.touched)"
             >
               กรุณากรอกเลขบัตรประชาชน 13 หลัก
             </ion-note>
