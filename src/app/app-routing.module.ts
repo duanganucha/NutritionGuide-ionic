@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'welcome',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '',
+  //   redirectTo: 'welcome',
+  //   pathMatch: 'full',
+  // },
   {
     path: 'login',
     loadChildren: () =>
@@ -64,7 +64,7 @@ const routes: Routes = [
       import('./calories/calories.module').then((m) => m.CaloriesPageModule),
   },
   {
-    path: 'welcome',
+    path: '',
     loadChildren: () =>
       import('./welcome/welcome.module').then((m) => m.WelcomePageModule),
   },
@@ -91,15 +91,17 @@ const routes: Routes = [
       import('./sodium-menu/sodium-menu.module').then(
         (m) => m.SodiumMenuPageModule
       ),
-  },  {
+  },
+  {
     path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () =>
+      import('./pages/cart/cart.module').then((m) => m.CartPageModule),
   },
   {
     path: 'records',
-    loadChildren: () => import('./records/records.module').then( m => m.RecordsPageModule)
+    loadChildren: () =>
+      import('./records/records.module').then((m) => m.RecordsPageModule),
   },
-
 ];
 
 @NgModule({

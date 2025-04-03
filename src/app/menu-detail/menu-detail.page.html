@@ -1,9 +1,14 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/menu"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ selectedItem?.name || 'รายละเอียดเมนูอาหาร' }}</ion-title>
+    <ion-buttons slot="end" (click)="goCartPage()">
+      <ion-button>
+        <ion-icon name="cart" slot="icon-only" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

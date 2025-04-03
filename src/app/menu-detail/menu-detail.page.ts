@@ -41,6 +41,7 @@ export class MenuDetailPage implements OnInit {
 
   async addToCart(item: any) {
     var newItem: any = {
+      id: item.id,
       name: item.name,
       category: item.category,
       sodium: item.nutrition.sodium,
@@ -94,5 +95,9 @@ export class MenuDetailPage implements OnInit {
     const menu_list: any[] =
       JSON.parse(localStorage.getItem('menu_select') as string) || [];
     console.log(menu_list);
+  }
+
+  goCartPage() {
+    this.router.navigate(['cart']);
   }
 }

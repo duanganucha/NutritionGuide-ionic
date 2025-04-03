@@ -124,7 +124,7 @@ export class CartPage implements OnInit {
     if (!this.userData) {
       const alert = await this.alertController.create({
         header: 'ข้อผิดพลาด',
-        message: 'ไม่พบข้อมูลผู้สั่งซื้อ กรุณาเข้าสู่ระบบ',
+        message: 'ไม่พบข้อมูล กรุณาเข้าสู่ระบบ',
         buttons: ['ตกลง'],
       });
       await alert.present();
@@ -132,7 +132,7 @@ export class CartPage implements OnInit {
     }
 
     const loading = await this.loadingController.create({
-      message: 'กำลังดำเนินการสั่งซื้อ...',
+      message: 'กำลังดำเนินการ...',
     });
     await loading.present();
 
@@ -176,7 +176,7 @@ export class CartPage implements OnInit {
       await loading.dismiss();
       // const alert = await this.alertController.create({
       //   header: 'ข้อผิดพลาด',
-      //   message: 'เกิดข้อผิดพลาดในการสั่งซื้อ กรุณาลองใหม่อีกครั้ง',
+      //   message: 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง',
       //   buttons: ['ตกลง'],
       // });
 

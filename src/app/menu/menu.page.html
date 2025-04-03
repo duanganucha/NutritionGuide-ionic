@@ -4,6 +4,11 @@
       <ion-back-button defaultHref="/main-menu"></ion-back-button>
     </ion-buttons>
     <ion-title>เมนูอาหาร</ion-title>
+    <ion-buttons slot="end" (click)="goCartPage()">
+      <ion-button>
+        <ion-icon name="cart" slot="icon-only" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -14,6 +19,18 @@
     </ion-toolbar>
   </ion-header>
 
+  <div style="text-align: center">
+    <ion-button
+      color="warning"
+      onclick="window.open('https://heyzine.com/flip-book/e76b52dea3.html', '_blank')"
+    >
+      รายการ เมนูอาหารท้องถิ่นลดโซเดียม 77 จังหวัด
+    </ion-button>
+  </div>
+
+  <div class="ion-activatable ripple-parent circle">
+    <ion-ripple-effect></ion-ripple-effect>
+  </div>
   <ion-list *ngFor="let category of categories">
     <ion-list-header>
       <ion-label>

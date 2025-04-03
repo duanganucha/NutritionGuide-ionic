@@ -1,21 +1,23 @@
-<div class="welcome-container">
-  <div class="content">
-    <div class="icon-container">
-      <img src="assets/icon/icon.png" />
+<ion-content>
+  <div class="welcome-container">
+    <div class="content">
+      <div class="icon-container">
+        <img src="assets/icon/icon.png" />
+      </div>
+
+      <h1>Less salt<br />for<br />better<br />life</h1>
     </div>
 
-    <h1>Less salt<br />for<br />better<br />life</h1>
+    <div class="button-container">
+      <button class="custom-button" (click)="menuPage()">
+        <div class="shimmer"></div>
+        <div class="button-content">
+          เริ่มใช้งานโปรแกรม
+          <svg class="cursor-icon" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </div>
+      </button>
+    </div>
   </div>
-
-  <div class="button-container">
-    <button class="custom-button" (click)="menuPage()">
-      <div class="shimmer"></div>
-      <div class="button-content">
-        เริ่มใช้งานโปรแกรม
-        <svg class="cursor-icon" viewBox="0 0 24 24">
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </div>
-    </button>
-  </div>
-</div>
+</ion-content>

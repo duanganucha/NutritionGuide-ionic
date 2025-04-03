@@ -16,7 +16,7 @@
   <!-- User Information Card -->
   <ion-card *ngIf="userData" class="ion-margin">
     <ion-card-header>
-      <ion-card-subtitle>ข้อมูลผู้สั่งซื้อ</ion-card-subtitle>
+      <ion-card-subtitle>ข้อมูลผู้ป้วย</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list lines="none">
@@ -62,7 +62,13 @@
       <ion-item *ngFor="let item of cartItems">
         <ion-thumbnail slot="start">
           <img
+            *ngIf="item.id < 1000"
             [src]="'assets/ingredients/' + item.name + '.png'"
+            [alt]="item.name"
+          />
+          <img
+            *ngIf="item.id  > 1000"
+            [src]="'assets/menu/' + item.name + '.png'"
             [alt]="item.name"
           />
         </ion-thumbnail>
@@ -93,14 +99,17 @@
     </ion-list>
 
     <!-- Total Amount Card -->
-    <ion-card class="ion-margin">
-      <ion-card-content>
+    <ion-card>
+      <ion-card-content
+        [ngStyle]="{backgroundColor: total > 2000 ? 'red' : 'green'}"
+      >
         <ion-item lines="none">
           <ion-label>
             <h2>โซเดียมรวมทั้งหมด</h2>
+            <h2>ไม่เกิน 2000 mg</h2>
           </ion-label>
           <ion-text slot="end" color="primary">
-            <h2>{{ total.toFixed(2) }}</h2>
+            <h1><b>รวม : {{ total.toFixed(2) }} mg</b></h1>
           </ion-text>
         </ion-item>
       </ion-card-content>

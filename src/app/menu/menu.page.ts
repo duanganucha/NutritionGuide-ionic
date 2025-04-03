@@ -45,4 +45,8 @@ export class MenuPage implements OnInit {
     console.log('navigateCarPage');
     this.router.navigate(['/cart']);
   }
+
+  goCartPage() {
+    this.router.navigate(['cart']);
+  }
 }

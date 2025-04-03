@@ -7,10 +7,11 @@ export interface Ingredient {
   weight: number;
   sodium: number;
   iconType: string;
-
+  detail?: string;
   quantity?: number;
   category: string;
   image: string;
+  unit: string;
 }
 
 @Injectable({
@@ -22,6 +23,7 @@ export class CartService {
   constructor() {}
 
   async addItem(item: Ingredient) {
+    console.log('Adding item:', item);
     const currentItems = this.cartItems.value;
     const existingItem = currentItems.find((i) => i.id === item.id);
 
