@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/video-list" text="ย้อนกลับ">
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">วิดีโอให้ความรู้</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="ion-text-center"
+        >วิดีโอให้ความรู้</ion-title
+      >
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="video-container" *ngIf="video">
+    <ion-card class="video-card">
+      <div class="video-wrapper">
+        <iframe
+          [src]="video.safeUrl"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <ion-card-header>
+        <ion-card-title class="ion-text-wrap">
+          {{ video.title }}
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-button
+      *ngIf="type == '1'"
+      expand="block"
+      fill="clear"
+      class="back-button"
+      (click)="goNext()"
+    >
+      <ion-icon slot="start" name="arrow-forward-outline"></ion-icon>
+      ถัดไป
+    </ion-button>
+
+    <ion-button
+      *ngIf="type == '2'"
+      expand="block"
+      fill="clear"
+      class="back-button"
+      (click)="goMain()"
+    >
+      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      กลับหน้าหลัก
+    </ion-button>
+  </div>
+</ion-content>

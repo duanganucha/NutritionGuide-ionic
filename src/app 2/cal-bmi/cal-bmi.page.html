@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>คำนวณดัชนีมวลกาย (BMI)</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">น้ำหนัก (กิโลกรัม)</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="weight"
+            [min]="0"
+            [max]="300"
+            placeholder="กรุณากรอกน้ำหนัก"
+          ></ion-input>
+          <ion-note slot="end">kg</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">ส่วนสูง (เซนติเมตร)</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="height"
+            [min]="0"
+            [max]="300"
+            placeholder="กรุณากรอกส่วนสูง"
+          ></ion-input>
+          <ion-note slot="end">cm</ion-note>
+        </ion-item>
+      </ion-list>
+
+      <div class="calculate-button-container">
+        <ion-button
+          expand="block"
+          (click)="calculateBMI()"
+          [disabled]="!weight || !height"
+        >
+          <ion-icon name="calculator-outline" slot="start"></ion-icon>
+          คำนวณ BMI
+        </ion-button>
+      </div>
+
+      <div class="calculate-button-container" *ngIf="bmi != 0">
+        <ion-button
+          expand="block"
+          (click)="gotoPageCalories()"
+          [disabled]="bmi == 0"
+        >
+          <ion-icon name="calculator-outline" slot="start"></ion-icon>
+          คำนวณแคลเลอรี่
+        </ion-button>
+      </div>
+
+      <div class="result-container" *ngIf="bmi">
+        <div class="bmi-gauge" [style.--percentage]="getBMIPercentage()">
+          <div class="gauge-value">{{ bmi | number:'1.1-1' }}</div>
+          <div class="gauge-label">BMI ของคุณ</div>
+        </div>
+
+        <ion-text [color]="getBMIColor()" class="category">
+          <div class="category-icon">{{ getCategoryEmoji() }}</div>
+          <div class="category-text">{{ getBMICategory() }}</div>
+        </ion-text>
+
+        <ion-grid class="bmi-scale">
+          <ion-row>
+            <ion-col size="6" size-sm="3">
+              <ion-text color="primary">
+                <div class="scale-item">น้ำหนักต่ำ<br />&lt;18.5</div>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6" size-sm="3">
+              <ion-text color="success">
+                <div class="scale-item">ปกติ<br />18.5-24.9</div>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6" size-sm="3">
+              <ion-text color="warning">
+                <div class="scale-item">น้ำหนักเกิน<br />25-29.9</div>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6" size-sm="3">
+              <ion-text color="danger">
+                <div class="scale-item">อ้วน<br />&gt;30</div>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

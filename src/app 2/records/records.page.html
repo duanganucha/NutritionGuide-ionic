@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main-menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <ion-text color="light">บันทึกรายการ</ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-accordion-group>
+    <ion-accordion
+      *ngFor="let record of records; let i = index"
+      [value]="'record-' + i"
+      class="custom-accordion"
+    >
+      <!-- Header with key information -->
+      <ion-item slot="header" lines="none" class="record-header">
+        <ion-icon
+          name="document-text-outline"
+          slot="start"
+          color="primary"
+        ></ion-icon>
+        <ion-label>
+          <h2>วันทีบันทึก : {{ record.orderDate | date:'dd-MM-yyyy' }}</h2>
+          <p>{{ record.orderNumber }}</p>
+        </ion-label>
+        <ion-badge color="secondary" slot="end">
+          {{ record.items.length }} รายการ
+        </ion-badge>
+      </ion-item>
+
+      <!-- Accordion Content -->
+      <div slot="content" class="ion-padding">
+        <!-- Nutritional Summary -->
+        <ion-card class="nutrition-summary">
+          <ion-card-header>
+            <ion-card-title>สรุปโภชนาการ</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-text color="primary">โซเดียมทั้งหมด</ion-text>
+                  <h3><b>{{ record.totalSodium }} mg</b></h3>
+                </ion-col>
+                <ion-col>
+                  <ion-text color="danger">แคลอรี่ทั้งหมด</ion-text>
+                  <h3>
+                    <b>
+                      {{ record.userData.calories | number : '1.2-2' }} kcal</b
+                    >
+                  </h3>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Items List -->
+        <ion-list class="items-list">
+          <ion-list-header>
+            <ion-label>รายการอาหาร</ion-label>
+          </ion-list-header>
+          <ion-item *ngFor="let item of record.items" lines="full">
+            <ion-avatar slot="start">
+              <ion-icon name="restaurant-outline" class="item-icon"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ item.name }}</h2>
+              <p>
+                <ion-text color="medium">
+                  ปริมาณ: {{ item.quantity }} | โซเดียม: {{ item.sodium }} mg
+                </ion-text>
+              </p>
+            </ion-label>
+            <ion-note slot="end">โซเดียม {{ item.total }} mg</ion-note>
+          </ion-item>
+        </ion-list>
+
+        <!-- User Profile -->
+        <ion-card class="user-profile">
+          <ion-card-header>
+            <ion-card-title>ข้อมูลผู้ใช้</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-text color="medium">ชื่อ</ion-text>
+                  <p>
+                    {{ record.userData.firstName }} {{ record.userData.lastName
+                    }}
+                  </p>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-text color="medium">เพศ</ion-text>
+                  <p>{{ record.userData.gender }}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-text color="medium">อายุ</ion-text>
+                  <p>{{ record.userData.age }} ปี</p>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-text color="medium">เบอร์โทร</ion-text>
+                  <p>{{ record.userData.telPhone }}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-text color="medium">BMI</ion-text>
+                  <p>{{ record.userData.bmi }}</p>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-text color="medium">กิจกรรม</ion-text>
+                  <p>{{ record.userData.activity }}</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- Empty State -->
+
+  <h5 class="ion-text-center" *ngIf="loading">กำลังโหลดข้อมูล...</h5>
+
+  <ion-text
+    *ngIf="!records || records.length === 0  &&
+    !loading"
+    color="medium"
+    class="ion-text-center"
+  >
+    <p>ไม่มีบันทึกรายการ</p>
+  </ion-text>
+</ion-content>

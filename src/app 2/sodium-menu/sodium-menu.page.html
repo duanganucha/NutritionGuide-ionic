@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main-menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>ปริมาณโซเดียม</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="sodium-menu-container">
+  <div class="header">
+    <h1>ปริมาณโซเดียม</h1>
+  </div>
+
+  <div class="menu-list">
+    <div class="menu-item" (click)="navigateToDetail('raw')">
+      <div class="icon-wrapper">
+        <svg class="menu-icon" viewBox="0 0 24 24">
+          <path d="M3 3h18v18H3z" />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M12 5v2M12 17v2M5 12h2M17 12h2" />
+        </svg>
+      </div>
+      <div class="content">
+        <h2>ปริมาณโซเดียมในผัก</h2>
+        <div class="info-tag">ข้อมูลจากวัตถุดิบ</div>
+      </div>
+    </div>
+
+    <div class="menu-item" (click)="navigateToDetail('processed')">
+      <div class="icon-wrapper blue">
+        <svg class="menu-icon" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5" />
+          <path d="M2 12l10 5 10-5" />
+        </svg>
+      </div>
+      <div class="content">
+        <h2>อาหารแปรรูป</h2>
+        <div class="info-tag">ข้อมูลจากอาหารแปรรูป</div>
+      </div>
+    </div>
+
+    <div class="menu-item" (click)="navigateToDetail('animal')">
+      <div class="icon-wrapper blue">
+        <svg class="menu-icon" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5" />
+          <path d="M2 12l10 5 10-5" />
+        </svg>
+      </div>
+      <div class="content">
+        <h2>เนื้อสัตว์</h2>
+        <div class="info-tag">ข้อมูลงจากเนื้อสัตว์</div>
+      </div>
+    </div>
+
+    <div class="menu-item" (click)="navigateToDetail('cooked')">
+      <div class="icon-wrapper purple">
+        <svg class="menu-icon" viewBox="0 0 24 24">
+          <path
+            d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+          />
+          <path d="M9 18h6" />
+          <path d="M10 22h4" />
+        </svg>
+      </div>
+      <div class="content">
+        <h2>เครื่องปรุง</h2>
+        <div class="info-tag">ข้อมูลจากเครื่องปรุงต่างๆ</div>
+      </div>
+    </div>
+  </div>
+</ion-content>

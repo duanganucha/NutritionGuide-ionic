@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar color="">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ selectedItem?.name || 'รายละเอียดเมนูอาหาร' }}</ion-title>
+    <ion-buttons slot="end" (click)="goCartPage()">
+      <ion-button>
+        <ion-icon name="cart" slot="icon-only" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="selectedItem; else noData">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="8">
+        <!-- Main Content -->
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ selectedItem.name }}</ion-card-title>
+            <ion-card-subtitle *ngIf="selectedItem.category">
+              {{ selectedItem.category }}
+            </ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-img
+            [src]="'assets/menu/' + selectedItem.name + '.png' || 'assets/placeholder.png'"
+            [alt]="selectedItem.name"
+            class="food-image"
+          >
+          </ion-img>
+
+          <!-- Nutrition Card -->
+          <ion-card-content *ngIf="selectedItem.nutrition">
+            <ion-list>
+              <ion-list-header>
+                <ion-label>
+                  <h2>ข้อมูลโภชนาการ <small>ต่อ 100 กรัม</small></h2>
+                </ion-label>
+              </ion-list-header>
+
+              <ion-item>
+                <ion-icon
+                  color="danger"
+                  name="flame-outline"
+                  slot="start"
+                ></ion-icon>
+                <ion-label>พลังงาน</ion-label>
+                <ion-note slot="end">
+                  {{ selectedItem.nutrition.calories || '-' }} kcal
+                </ion-note>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon
+                  color="tertiary"
+                  name="fitness-outline"
+                  slot="start"
+                ></ion-icon>
+                <ion-label>โปรตีน</ion-label>
+                <ion-note slot="end">
+                  {{ selectedItem.nutrition.protein || '-' }} g
+                </ion-note>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon
+                  color="warning"
+                  name="water-outline"
+                  slot="start"
+                ></ion-icon>
+                <ion-label>ไขมัน</ion-label>
+                <ion-note slot="end">
+                  {{ selectedItem.nutrition.fat || '-' }} g
+                </ion-note>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon
+                  color="success"
+                  name="pizza-outline"
+                  slot="start"
+                ></ion-icon>
+                <ion-label>คาร์โบไฮเดรต</ion-label>
+                <ion-note slot="end">
+                  {{ selectedItem.nutrition.carbs || '-' }} g
+                </ion-note>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon
+                  color="medium"
+                  name="sunny-outline"
+                  slot="start"
+                ></ion-icon>
+                <ion-label>โซเดียม</ion-label>
+                <ion-note slot="end">
+                  {{ selectedItem.nutrition.sodium || '-' }} mg
+                </ion-note>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <!-- Ingredients -->
+        <ion-card *ngIf="selectedItem.ingredients?.length">
+          <ion-card-header>
+            <ion-card-title>ส่วนประกอบ</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item
+                *ngFor="let ingredient of selectedItem.ingredients ;let i = index"
+              >
+                <ion-label> {{ i + 1 }}. {{ ingredient }}</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Instructions -->
+        <ion-card *ngIf="selectedItem.instructions?.length">
+          <ion-card-header>
+            <ion-card-title>วิธีทำ</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item
+                *ngFor="let step of selectedItem.instructions; let i = index"
+              >
+                <ion-label class="ion-text-wrap">
+                  <h3>ขั้นตอนที่ {{ i + 1 }}</h3>
+                  <p>{{ step }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="calculate-button-container">
+    <ion-button expand="block" (click)="selectMenu(selectedItem)">
+      <ion-icon name="calculator-outline" slot="start"></ion-icon>
+      เลือกเมนู
+    </ion-button>
+  </div>
+</ion-content>
+
+<ng-template #noData>
+  <ion-content class="ion-padding ion-text-center">
+    <ion-icon name="restaurant-outline" size="large"></ion-icon>
+    <h2>กรุณาเลือกเมนูเพื่อดูรายละเอียด</h2>
+  </ion-content>
+</ng-template>

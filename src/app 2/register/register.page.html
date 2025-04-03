@@ -1,0 +1,180 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title> </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="register-container">
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+    <ion-card class="form-card">
+      <ion-card-header class="form-header">
+        <ion-card-title>ข้อมูลส่วนตัว</ion-card-title>
+        <ion-card-subtitle>กรุณากรอกข้อมูลให้ครบถ้วน</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">ชื่อ</ion-label>
+            <ion-input
+              [(ngModel)]="userData.firstName"
+              name="firstName"
+              type="text"
+              required
+              #firstName="ngModel"
+              placeholder="กรุณากรอกชื่อ"
+            >
+            </ion-input>
+            <ion-note
+              color="danger"
+              *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+            >
+              กรุณากรอกชื่อ
+            </ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">นามสกุล</ion-label>
+            <ion-input
+              [(ngModel)]="userData.lastName"
+              name="lastName"
+              type="text"
+              required
+              #lastName="ngModel"
+              placeholder="กรุณากรอกนามสกุล"
+            >
+            </ion-input>
+            <ion-note
+              color="danger"
+              *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+            >
+              กรุณากรอกนามสกุล
+            </ion-note>
+          </ion-item>
+
+          <!-- <ion-item>
+            <ion-label position="stacked">เลขบัตรประชาชน</ion-label>
+            <ion-input
+              [(ngModel)]="userData.idCard"
+              name="idCard"
+              type="text"
+              required
+              maxlength="13"
+              pattern="[0-9]{13}"
+              #idCard="ngModel"
+              placeholder="กรุณากรอกเลขบัตรประชาชน"
+            >
+            </ion-input>
+            <ion-note
+              color="danger"
+              *ngIf="idCard.invalid && (idCard.dirty || idCard.touched)"
+            >
+              กรุณากรอกเลขบัตรประชาชน 13 หลัก
+            </ion-note>
+          </ion-item> -->
+
+          <ion-item>
+            <ion-label position="stacked">เบอร์โทรศัพท์</ion-label>
+            <ion-input
+              [(ngModel)]="userData.telPhone"
+              name="telPhone"
+              type="text"
+              required
+              maxlength="10"
+              pattern="[0-9]{10}"
+              #telPhone="ngModel"
+              placeholder="กรุณากรอกเบอร์โทรศัพท์"
+            >
+            </ion-input>
+            <!-- <ion-note
+              color="danger"
+              *ngIf="telPhone.invalid && (telPhone.dirty || telPhone.touched)"
+            >
+              กรุณากรอกเลขบัตรประชาชน 13 หลัก
+            </ion-note> -->
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">เพศ</ion-label>
+            <ion-select
+              [(ngModel)]="userData.gender"
+              name="gender"
+              required
+              #gender="ngModel"
+              placeholder="เลือกเพศ"
+            >
+              <ion-select-option value="male">ชาย</ion-select-option>
+              <ion-select-option value="female">หญิง</ion-select-option>
+              <ion-select-option value="other">อื่นๆ</ion-select-option>
+            </ion-select>
+            <ion-note
+              color="danger"
+              *ngIf="gender.invalid && (gender.dirty || gender.touched)"
+            >
+              กรุณาเลือกเพศ
+            </ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">อายุ</ion-label>
+            <ion-input
+              [(ngModel)]="userData.age"
+              name="age"
+              type="number"
+              required
+              min="1"
+              max="120"
+              #age="ngModel"
+              placeholder="กรุณากรอกอายุ"
+            >
+            </ion-input>
+            <ion-note
+              color="danger"
+              *ngIf="age.invalid && (age.dirty || age.touched)"
+            >
+              กรุณากรอกอายุ (1-120 ปี)
+            </ion-note>
+          </ion-item>
+        </ion-list>
+
+        <div class="button-group">
+          <button type="submit" class="submit-button">
+            <span>บันทึกข้อมูล</span>
+            <svg
+              class="button-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearForm(registerForm)"
+          >
+            <span>ล้างข้อมูล</span>
+            <svg
+              class="button-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"
+              />
+              <path d="M10 11v6M14 11v6" />
+            </svg>
+          </button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>

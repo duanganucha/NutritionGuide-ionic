@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="menu-container">
+    <header class="header">
+      <h1 class="title floating">Less salt for better life</h1>
+    </header>
+
+    <div class="menu-grid">
+      <div
+        *ngFor="let item of menuItems"
+        class="menu-card"
+        (click)="navigateTo(item.route)"
+      >
+        <div class="card-content">
+          <div
+            class="icon-wrapper purple"
+            [style.backgroundColor]="item.color + '1A'"
+            [style.color]="item.color"
+          >
+            <ion-icon size="large" [name]="item.icon"></ion-icon>
+          </div>
+          <div class="card-text">
+            <h3 class="card-title">{{item.title}}</h3>
+            <p class="card-description">{{item.description}}</p>
+          </div>
+          <svg class="arrow-icon" viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

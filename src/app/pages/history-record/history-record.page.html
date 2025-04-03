@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>History Records</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+    [(ngModel)]="searchText"
+    (ionInput)="filterRecords()"
+    placeholder="ค้นหาตามชื่อ..."
+  ></ion-searchbar>
+
+  <ion-item>
+    <ion-label position="stacked">เลือกวันที่</ion-label>
+    <input type="date" [(ngModel)]="selectedDate" (change)="filterRecords()" />
+  </ion-item>
+
+  <ion-button expand="full" color="danger" (click)="clearFilter()"
+    >❌ ล้างค่าการค้นหา</ion-button
+  >
+
+  <ion-grid>
+    <!-- หัวตาราง -->
+    <ion-row class="header-row">
+      <ion-col size="2"><strong>Order Number</strong></ion-col>
+      <ion-col size="2"><strong>Order Date</strong></ion-col>
+      <ion-col size="2"><strong>fullname</strong></ion-col>
+      <ion-col size="2"><strong>Telphone</strong></ion-col>
+      <ion-col size="1"><strong>Food Item</strong></ion-col>
+      <ion-col size="1"><strong>Qty</strong></ion-col>
+      <ion-col size="1"><strong>Sodium (mg)</strong></ion-col>
+      <ion-col size="1"><strong>Total Sodium</strong></ion-col>
+    </ion-row>
+
+    <!-- วนลูปแสดงข้อมูล -->
+    <ion-row *ngFor="let record of filteredRecords" class="data-row">
+      <ion-col size="2">{{ record.orderNumber }}</ion-col>
+      <ion-col size="2">{{ record.orderDate }}</ion-col>
+      <ion-col size="2">{{ record.fullname }} </ion-col>
+      <ion-col size="2">{{ record.telPhone }} </ion-col>
+
+      <ion-col size="1">{{ record.foodName }}</ion-col>
+      <ion-col size="1">{{ record.quantity }}</ion-col>
+      <ion-col size="1">{{ record.sodium }}</ion-col>
+      <ion-col size="1">
+        <ion-badge color="warning">{{ record.totalSodium }} mg</ion-badge>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="summary-row">
+      <ion-col size="10" class="text-right"
+        ><strong>รวมโซเดียมทั้งหมด:</strong></ion-col
+      >
+      <ion-col size="2">
+        <ion-badge color="danger">{{ totalSodiumSum }} mg</ion-badge>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>วิธีให้ความรู้</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="video-list-container">
+  <div class="header">
+    <h1>วิธีให้ความรู้</h1>
+  </div>
+
+  <div class="list-container">
+    <div
+      class="list-item"
+      *ngFor="let video of videoList"
+      (click)="navigateToVideo(video.route)"
+    >
+      <div class="icon-wrapper">
+        <svg viewBox="0 0 24 24" class="list-icon">
+          <path d="M12 14c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4z" />
+          <path
+            d="M20 4h-4L14 2H10L8 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"
+          />
+        </svg>
+      </div>
+      <span>{{ video.title }}</span>
+      <svg class="arrow-icon" viewBox="0 0 24 24">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </div>
+  </div>
+</ion-content>

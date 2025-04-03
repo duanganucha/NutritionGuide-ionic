@@ -102,13 +102,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./records/records.module').then((m) => m.RecordsPageModule),
   },
-  {
-    path: 'history-record',
-    loadChildren: () =>
-      import('./pages/history-record/history-record.module').then(
-        (m) => m.HistoryRecordPageModule
-      ),
-  },
 ];
 
 @NgModule({

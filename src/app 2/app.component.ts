@@ -14,7 +14,6 @@ export class AppComponent {
     { title: 'เมนูอาหาร', url: '/menu', icon: 'restaurant' }, // Changed to restaurant icon
     { title: 'ส่วนประกอบอาหาร', url: '/sodium-menu', icon: 'nutrition' }, // Changed to nutrition icon
     { title: 'วิดีโอความรู้', url: 'video/1', icon: 'videocam' }, // Changed to video camera icon
-    { title: 'history-record', url: 'history-record', icon: 'videocam' }, // Changed to video camera icon
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {}

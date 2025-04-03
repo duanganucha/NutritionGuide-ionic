@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main-menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>รายการที่เลือก</ion-title>
+    <ion-buttons slot="end" *ngIf="cartItems.length > 0">
+      <ion-button (click)="clearCart()">
+        <ion-icon name="trash" slot="icon-only" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- User Information Card -->
+  <ion-card *ngIf="userData" class="ion-margin">
+    <ion-card-header>
+      <ion-card-subtitle>ข้อมูลผู้ป้วย</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-icon name="person" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            <h3>ชื่อ-นามสกุล</h3>
+            <p>{{ userData.firstName }} {{ userData.lastName }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="card" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            <h3>เบอร์โทรศัพท์</h3>
+            <p>{{ userData.telPhone }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon
+            [name]="userData.gender === 'female' ? 'woman' : 'man'"
+            slot="start"
+            color="primary"
+          ></ion-icon>
+          <ion-label>
+            <h3>เพศ-อายุ</h3>
+            <p>
+              {{ userData.gender === 'female' ? 'หญิง' : 'ชาย' }} - {{
+              userData.age }} ปี
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ng-container *ngIf="cartItems.length > 0; else emptyCart">
+    <!-- Cart Items List -->
+    <ion-list>
+      <ion-list-header>
+        <ion-label>รายการสินค้า</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let item of cartItems">
+        <ion-thumbnail slot="start">
+          <img
+            *ngIf="item.id < 1000"
+            [src]="'assets/ingredients/' + item.name + '.png'"
+            [alt]="item.name"
+          />
+          <img
+            *ngIf="item.id  > 1000"
+            [src]="'assets/menu/' + item.name + '.png'"
+            [alt]="item.name"
+          />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+          <p>น้ำหนัก {{ item.weight }} g มีโซเดียม {{ item.sodium }}mg</p>
+          <!-- <p class="sodium-info">
+            <ion-icon name="medical-outline" color="warning"></ion-icon>
+            โซเดียม {{ sumSodium(item.quantity,item.sodium ) }} mg
+          </p> -->
+        </ion-label>
+        <ion-row class="ion-align-items-center" slot="end">
+          <ion-col>
+            <ion-button fill="clear" (click)="updateQuantity(item, false)">
+              <ion-icon name="remove-circle"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-text>{{ item.quantity || 1 }}</ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-button fill="clear" (click)="updateQuantity(item, true)">
+              <ion-icon name="add-circle"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+    <!-- Total Amount Card -->
+    <ion-card>
+      <ion-card-content
+        [ngStyle]="{backgroundColor: total > 2000 ? 'red' : 'green'}"
+      >
+        <ion-item lines="none">
+          <ion-label>
+            <h2>โซเดียมรวมทั้งหมด</h2>
+            <h2>ไม่เกิน 2000 mg</h2>
+          </ion-label>
+          <ion-text slot="end" color="primary">
+            <h1><b>รวม : {{ total.toFixed(2) }} mg</b></h1>
+          </ion-text>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Checkout Button -->
+    <div class="ion-padding">
+      <ion-button expand="block" size="large" (click)="submitOrder()">
+        <ion-icon name="bag-check" slot="start"></ion-icon>
+        บันทึกรายการประจำวัน
+      </ion-button>
+    </div>
+  </ng-container>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart-container">
+      <ion-icon name="cart" class="empty-cart-icon"></ion-icon>
+      <h2>ยังไม่ได้เลือกส่วนประกอบ</h2>
+
+      <!-- <ion-button routerLink="/ingredients" expand="block" class="ion-margin">
+        เลือกส่วนประกอบอาหาร
+      </ion-button> -->
+    </div>
+  </ng-template>
+</ion-content>

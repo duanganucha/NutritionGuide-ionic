@@ -1,0 +1,84 @@
+.result-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.bmi-gauge {
+    width: 200px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    background: var(--ion-color-light);
+    border-radius: 100px 100px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.bmi-gauge::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(var(--percentage) * 1%);
+    height: 100%;
+    background: linear-gradient(to right,
+            var(--ion-color-primary),
+            var(--ion-color-success),
+            var(--ion-color-warning),
+            var(--ion-color-danger));
+    transition: width 0.3s ease;
+}
+
+.gauge-value {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+.gauge-label {
+    position: relative;
+    font-weight: 500;
+    color: var(--ion-color-medium);
+}
+
+.category {
+    display: block;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.category-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-text {
+    font-weight: 600;
+}
+
+.bmi-scale {
+    background: var(--ion-color-light);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.scale-item {
+    text-align: center;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+}
+
+ion-note {
+    margin-left: 8px;
+}
+
+.calculate-button-container {
+    margin: 20px 0;
+    padding: 0 16px;
+}
+
+ion-button {
+    --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
